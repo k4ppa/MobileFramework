@@ -1,3 +1,4 @@
 .project
 .pydevproject
 *.pyc
+src/mobile_framework/tests/runfiles_*
