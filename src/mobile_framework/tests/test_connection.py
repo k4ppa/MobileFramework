@@ -7,28 +7,37 @@ class TestConnection(unittest.TestCase):
     
 
     def setUp(self):
+        self.device = MobileDevice()
         pass
 
-
+    
     def tearDown(self):
+        self.device.closeConnection()
         pass
 
-
+    
     def test_connect_device_to_the_server(self):
-        device = MobileDevice()
-        isConnected = device.openConnection("s15016hv01", "Service Monitoring")
+        print "TEST_CONNECT_DEVICE_TO_THE_SERVER"
+        isConnected = self.device.openConnection("s15016hv01", "This is the real server")
         
         self.assertEqual(isConnected, True, "Device connection to the server failed")
         pass
     
     
+    def test_connect_device_to_false_server_raise_exception(self):
+        print "TEST_CONNECT_DEVICE_TO_THE_SERVER_RAISE_EXCEPTION"
+        
+        self.assertRaises(SystemExit, self.device.openConnection, "server", "This server doesn't exist")
+        pass
+    
+    
     def test_disconnect_device_to_the_server(self):
-        device = MobileDevice()
-        isDisconnected = device.closeConnection()
+        print "TEST_DISCONNECT_DEVICE_TO_THE_SERVER"
+        isDisconnected = self.device.closeConnection()
         
         self.assertEqual(isDisconnected, True, "Device disconnection to the server failed")
         pass
-
+    
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
