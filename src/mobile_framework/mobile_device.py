@@ -8,7 +8,7 @@ class MobileDevice(object):
         pass
 
     
-    def openConnection(self, server, description=''):
+    def connect(self, server, description=''):
         StormTest.BeginLogRegion('Open Connection')
         
         try:
@@ -20,7 +20,7 @@ class MobileDevice(object):
         return True
 
     
-    def closeConnection(self):
+    def disconnect(self):
         return StormTest.ReleaseServerConnection()
     
     
