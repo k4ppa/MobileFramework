@@ -14,7 +14,12 @@ class MobileDevice(object):
         StormTest.BeginLogRegion('Open Connection')
         
         self.__setUpEnvironment()
-        return self.__openConnection(self.__server, description)
+        isConnected = self.__openConnection(self.__server, description)
+        isReserved = StormTest.ReserveSlot(self.__slot, signalDb='default', serialParams=[], videoFlag=True)
+        
+        if isConnected and isReserved:
+            return 1
+        return isReserved
         '''
         if StormTest.ReserveSlot(self.__slot, 'default', serialParams=[], videoFlag=True) is 0:
             StormTest.EndLogRegion('Pre', StormTest.LogRegionStyle.Fail, comment='Failed to reserve slot (%d)' % self.__slot)
