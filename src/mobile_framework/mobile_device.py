@@ -1,5 +1,6 @@
 
 import stormtest.ClientAPI as StormTest
+import stormtest.WarningCenter as WarningCenter 
 
 
 class MobileDevice(object):
@@ -13,14 +14,24 @@ class MobileDevice(object):
     def connect(self, description=''):
         StormTest.BeginLogRegion('Open Connection')
         
+        params = self.__getTestRunConfiguration()
+        serviceInfo = params['service']
+        
         self.__setUpEnvironment()
         isConnected = self.__openConnection(self.__server, description)
         isReserved = self.__reserveSlot(self.__slot, signalDb='', serialParams=[], videoFlag=True)
         isOCRLicenseOver = self.__OCRCheckRemainingChars()
          
-        
         return self.__connectionEstablished(isConnected, isReserved, isOCRLicenseOver)
         
+        
+    def __getTestRunConfiguration(self):
+        params = WarningCenter.GetTestRun()
+        if params == None:      #debug mode - use a hard coded set of parameters
+            from mobile_framework.tests.test_environment import TestEnvironment
+            params = TestEnvironment.params
+            
+        return params    
 
     def __setUpEnvironment(self):
         if not StormTest.IsUnderDaemon():

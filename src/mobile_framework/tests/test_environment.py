@@ -1,9 +1,17 @@
 
 class TestEnvironment(object):
     
-    #useIncorrectServerName = False
     serverName = "s15016hv01"
     slotNumber = 1
+    
+    params = {"service": {"displayName": "An iPad Service",
+                                            "id": 21,
+                                            "name": "iPadService",
+                                            "number": "",
+                                            "tags": [],
+                                            "type": "linear"
+                                            }
+                            }
     
     
     def __init__(self):
