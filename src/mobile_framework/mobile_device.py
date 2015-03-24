@@ -29,12 +29,12 @@ class MobileDevice(object):
     
     def __setUpEnvironment(self):
         if not StormTest.IsUnderDaemon():
-            self.__setUpFakeEnvironment()
+            self.__setUpTestEnvironment()
         else:
             self.__setUpRealEnvironment()
             
     
-    def __setUpFakeEnvironment(self):
+    def __setUpTestEnvironment(self):
         from mobile_framework.tests.test_environment import TestEnvironment
         self.__server = TestEnvironment.getServerName()
         self.__slot = TestEnvironment.getSlotNumber()

@@ -27,7 +27,7 @@ class TestConnection(unittest.TestCase):
     
     def test_connect_device_to_false_server_fail(self):
         print "TEST_CONNECT_DEVICE_TO_THE_SERVER_FAIL"
-        TestEnvironment.setUseIncorrectServerName(True)
+        TestEnvironment.setServerName("WrongServerName")
         isConnected = self.device.connect("Connect with non existing server")
         
         self.assertEqual(isConnected, False, "Connection successful")
@@ -36,7 +36,7 @@ class TestConnection(unittest.TestCase):
     
     def test_connect_device_fail_and_reserve_slot_fail(self):
         print "TEST_CONNECT_DEVICE_FAIL_AND_RESERVE_SLOT_FAIL"
-        TestEnvironment.setUseIncorrectServerName(True)
+        TestEnvironment.setServerName("WrongServerName")
         isConnected = self.device.connect("Connect with the real server")
         
         self.assertEqual(isConnected, False, "Connection successful")

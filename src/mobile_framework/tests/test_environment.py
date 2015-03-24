@@ -1,7 +1,7 @@
 
 class TestEnvironment(object):
     
-    useIncorrectServerName = False
+    #useIncorrectServerName = False
     serverName = "s15016hv01"
     slotNumber = 1
     
@@ -11,24 +11,24 @@ class TestEnvironment(object):
 
     
     @staticmethod
-    def setUseIncorrectServerName(isCorrect):
-        TestEnvironment.useIncorrectServerName = isCorrect
+    def setServerName(serverName):
+        TestEnvironment.serverName = serverName
         pass
     
 
+    @staticmethod
+    def getServerName():
+        if TestEnvironment.serverName is not "s15016hv01":
+            TestEnvironment.serverName = "s15016hv01"
+            return "Incorrect server"
+        return TestEnvironment.serverName
+
+    
     @staticmethod
     def setSlotNumber(slotNumber):
         TestEnvironment.slotNumber = slotNumber
         pass
 
-
-    @staticmethod
-    def getServerName():
-        if TestEnvironment.useIncorrectServerName is True:
-            TestEnvironment.useIncorrectServerName = False
-            return "Incorrect server"
-        return TestEnvironment.serverName
-    
     
     @staticmethod
     def getSlotNumber():
