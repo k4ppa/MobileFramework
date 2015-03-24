@@ -10,14 +10,16 @@ class MobileDevice(object):
         pass
 
     
-
-
     def connect(self, description=''):
         StormTest.BeginLogRegion('Open Connection')
         
         self.__setUpEnvironment()
-        self.__openConnection(self.__server, description)
-        return True
+        return self.__openConnection(self.__server, description)
+        '''
+        if StormTest.ReserveSlot(self.__slot, 'default', serialParams=[], videoFlag=True) is 0:
+            StormTest.EndLogRegion('Pre', StormTest.LogRegionStyle.Fail, comment='Failed to reserve slot (%d)' % self.__slot)
+            return 0
+        '''
 
     
     def __setUpEnvironment(self):
@@ -44,7 +46,8 @@ class MobileDevice(object):
             StormTest.ConnectToServer(server, description)
         except SystemExit:
             StormTest.EndLogRegion('Open Connection', StormTest.LogRegionStyle.Fail, comment='Failed to connect to server (%s)' % server)
-            raise
+            return False
+        return True
         pass
         
     

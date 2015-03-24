@@ -28,10 +28,17 @@ class TestConnection(unittest.TestCase):
     def test_connect_device_to_false_server_raise_exception(self):
         print "TEST_CONNECT_DEVICE_TO_THE_SERVER_RAISE_EXCEPTION"
         TestEnvironment.setUseIncorrectServerName(True)
+        isConnected = self.device.connect("Connect with non existing server")
         
-        self.assertRaises(SystemExit, self.device.connect, "Connect with a non existing server")
+        self.assertEqual(isConnected, False, "Connection successful")
         pass
     
+    '''
+    def test_connect_device_and_reserve_slot(self):
+        print "TEST_CONNECT_DEVICE_AND_RESERVE_SLOT"
+        isConnected = self.device.connect("Connect with the real server")
+        pass
+    '''
     
     def test_disconnect_device_to_the_server(self):
         print "TEST_DISCONNECT_DEVICE_TO_THE_SERVER"
