@@ -33,12 +33,15 @@ class TestConnection(unittest.TestCase):
         self.assertEqual(isConnected, False, "Connection successful")
         pass
     
-    '''
-    def test_connect_device_and_reserve_slot(self):
-        print "TEST_CONNECT_DEVICE_AND_RESERVE_SLOT"
+    
+    def test_connect_device_fail_and_reserve_slot_fail(self):
+        print "TEST_CONNECT_DEVICE_FAIL_AND_RESERVE_SLOT_FAIL"
+        TestEnvironment.setUseIncorrectServerName(True)
         isConnected = self.device.connect("Connect with the real server")
+        
+        self.assertEqual(isConnected, False, "Connection successful")
         pass
-    '''
+    
     
     def test_disconnect_device_to_the_server(self):
         print "TEST_DISCONNECT_DEVICE_TO_THE_SERVER"
