@@ -9,7 +9,15 @@ class MobileDevice(object):
 
     
     def openConnection(self, server, description=''):
-        return StormTest.ConnectToServer(server, description)
+        StormTest.BeginLogRegion('Open Connection')
+        
+        try:
+            StormTest.ConnectToServer(server, description)
+        except SystemExit:
+            StormTest.EndLogRegion('Open Connection', StormTest.LogRegionStyle.Fail, comment='Failed to connect to server (%s)' % server)
+            raise
+        
+        return True
 
     
     def closeConnection(self):
