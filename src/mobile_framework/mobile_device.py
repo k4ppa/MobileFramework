@@ -4,15 +4,25 @@ import stormtest.ClientAPI as StormTest
 
 class MobileDevice(object):
     def __init__(self):
-        self.server = ""
-        self.description = ""
+        self.__server = ""
+        self.__description = ""
+        self.__slot = 0
         pass
 
     
-    def connect(self, server, description=''):
+    def connect(self, description=''):
         StormTest.BeginLogRegion('Open Connection')
         
-        self.__openConnection(server, description)
+        if not StormTest.IsUnderDaemon():
+            from mobile_framework.tests.test_environment import TestEnvironment
+            self.__server = TestEnvironment.getServerName()
+            self.__slot = TestEnvironment.getSlotNumber()
+        else:
+            slotAllocated = StormTest.GetPhysicalAllocations()
+            self.__server = slotAllocated[0].split(':')[0]
+            self.__slot = slotAllocated[1][0]
+        
+        self.__openConnection(self.__server, description)
         return True
     
     
