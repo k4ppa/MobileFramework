@@ -17,6 +17,12 @@ class TestEnvironment(object):
     
 
     @staticmethod
+    def setSlotNumber(slotNumber):
+        TestEnvironment.slotNumber = slotNumber
+        pass
+
+
+    @staticmethod
     def getServerName():
         if TestEnvironment.useIncorrectServerName is True:
             TestEnvironment.useIncorrectServerName = False
@@ -27,6 +33,10 @@ class TestEnvironment(object):
     @staticmethod
     def getSlotNumber():
         return TestEnvironment.slotNumber
+
+    
+    
+    
 
 
 

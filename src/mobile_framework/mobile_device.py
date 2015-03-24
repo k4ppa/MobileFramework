@@ -15,7 +15,7 @@ class MobileDevice(object):
         
         self.__setUpEnvironment()
         isConnected = self.__openConnection(self.__server, description)
-        isReserved = StormTest.ReserveSlot(self.__slot, signalDb='default', serialParams=[], videoFlag=True)
+        isReserved = StormTest.ReserveSlot(self.__slot, signalDb='', serialParams=[], videoFlag=True)
         
         if isConnected and isReserved:
             return 1
