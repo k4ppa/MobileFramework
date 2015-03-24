@@ -15,18 +15,13 @@ class MobileDevice(object):
         
         self.__setUpEnvironment()
         isConnected = self.__openConnection(self.__server, description)
-        isReserved = StormTest.ReserveSlot(self.__slot, signalDb='', serialParams=[], videoFlag=True)
+        isReserved = self.__reserveSlot(self.__slot, signalDb='', serialParams=[], videoFlag=True)
+        isOCRLicenseOver = self.__OCRCheckRemainingChars()
+         
         
-        if isConnected and isReserved:
-            return 1
-        return isReserved
-        '''
-        if StormTest.ReserveSlot(self.__slot, 'default', serialParams=[], videoFlag=True) is 0:
-            StormTest.EndLogRegion('Pre', StormTest.LogRegionStyle.Fail, comment='Failed to reserve slot (%d)' % self.__slot)
-            return 0
-        '''
+        return self.__connectionEstablished(isConnected, isReserved, isOCRLicenseOver)
+        
 
-    
     def __setUpEnvironment(self):
         if not StormTest.IsUnderDaemon():
             self.__setUpTestEnvironment()
@@ -54,7 +49,29 @@ class MobileDevice(object):
             return False
         return True
         pass
+    
+    
+    def __reserveSlot(self, slot, signalDb='', serialParams=[], videoFlag=True):
+        isReserved = StormTest.ReserveSlot(slot, signalDb, serialParams, videoFlag)
+        if isReserved is False:    
+            StormTest.EndLogRegion('Open Connection', StormTest.LogRegionStyle.Fail, comment='Failed to reserve slot (%d)' % slot)
+            
+        return isReserved 
         
+    
+    def __OCRCheckRemainingChars(self):
+        remainingChars = StormTest.OCRGetRemainingChars()
+        if remainingChars is 0:    
+            StormTest.EndLogRegion('Open Connection', StormTest.LogRegionStyle.Fail, comment='OCR licenses has ran out. Not possible to run tests.')
+    
+        return remainingChars
+    
+    
+    def __connectionEstablished(self, isConnected, isReserved, isOCRLicenseOver):
+        if isConnected and isReserved and isOCRLicenseOver:
+            return 1
+        return isReserved
+    
     
     def disconnect(self):
         return StormTest.ReleaseServerConnection()
