@@ -2,10 +2,7 @@
 import stormtest.ClientAPI as StormTest
 from mobile_framework.connectFunctions import _getTestRunConfiguration
 from mobile_framework.connectFunctions import _setUpEnvironment
-from mobile_framework.connectFunctions import _openConnection
-from mobile_framework.connectFunctions import _reserveSlot
-from mobile_framework.connectFunctions import _OCRCheckRemainingChars
-from mobile_framework.connectFunctions import _connectionEstablished
+from mobile_framework.connectFunctions import _establishConnection
 
 
 class MobileDevice(object):
@@ -23,14 +20,7 @@ class MobileDevice(object):
         serviceInfo = params['service']
         
         self._server, self._slot = _setUpEnvironment()
-        isServerConnected = _openConnection(self._server, description)
-        isSlotReserved = _reserveSlot(self._slot, signalDb='', serialParams=[], videoFlag=True)
-        
-        isConnectionOk = False
-        if isServerConnected and isSlotReserved:
-            isConnectionOk = _OCRCheckRemainingChars()
-            
-        return _connectionEstablished(isConnectionOk) 
+        return _establishConnection(self._server, self._slot, description)
          
     
     

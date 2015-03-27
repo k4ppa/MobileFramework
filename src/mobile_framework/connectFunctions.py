@@ -33,6 +33,16 @@ def _setUpRealEnvironment(self):
     return server, slot
 
 
+def _establishConnection(server, slot, description):
+    isServerConnected = _openConnection(server, description)
+    isSlotReserved = _reserveSlot(slot, signalDb='', serialParams=[], videoFlag=True)
+    isConnectionOk = False
+    
+    if isServerConnected and isSlotReserved:
+        isConnectionOk = _OCRCheckRemainingChars()
+    return isConnectionOk
+
+
 def _openConnection(server, description):
     try:
         StormTest.ConnectToServer(server, description)
