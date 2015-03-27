@@ -36,12 +36,9 @@ def _setUpRealEnvironment(self):
 def _establishConnection(server, slot, description):
     isServerConnected = _openConnection(server, description)
     isSlotReserved = _reserveSlot(slot, signalDb='', serialParams=[], videoFlag=True)
-    isConnectionOk = False
     
-    if isServerConnected and isSlotReserved:
-        isConnectionOk = _OCRCheckRemainingChars()
-    return isConnectionOk
-
+    return _isConnectionOk(isServerConnected, isSlotReserved)
+    
 
 def _openConnection(server, description):
     try:
@@ -55,10 +52,17 @@ def _openConnection(server, description):
 
 def _reserveSlot(slot, signalDb='', serialParams=[], videoFlag=True):
     isReserved = StormTest.ReserveSlot(slot, signalDb, serialParams, videoFlag)
-    if isReserved is False:    
+    if isReserved is 0:    
         StormTest.EndLogRegion('Open Connection', StormTest.LogRegionStyle.Fail, comment='Failed to reserve slot (%d)' % slot)
         
     return isReserved 
+    
+    
+def _isConnectionOk(isServerConnected, isSlotReserved):
+    isConnectionOk = False
+    if isServerConnected and isSlotReserved:
+        isConnectionOk = _OCRCheckRemainingChars()
+    return isConnectionOk    
     
 
 def _OCRCheckRemainingChars():
@@ -71,7 +75,4 @@ def _OCRCheckRemainingChars():
     return True
 
 
-def _connectionEstablished(isConnectionOk):
-    if isConnectionOk:
-        return True
-    return False
+
