@@ -25,7 +25,7 @@ class TestConnection(unittest.TestCase):
         pass
     
     
-    def test_connect_device_to_false_server_fail(self):
+    def test_connect_device_to_the_server_fail(self):
         print "TEST_CONNECT_DEVICE_TO_THE_SERVER_FAIL"
         TestEnvironment.setServerName("WrongServerName")
         isConnected = self.device.connect("Connect with non existing server")

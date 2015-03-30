@@ -1,5 +1,8 @@
 
+import logging.config
+
 import stormtest.ClientAPI as StormTest
+
 from mobile_framework.connectFunctions import _getTestRunConfiguration
 from mobile_framework.connectFunctions import _setUpEnvironment
 from mobile_framework.connectFunctions import _establishConnection
@@ -10,6 +13,10 @@ class MobileDevice(object):
         self._server = ""
         self._description = ""
         self._slot = 0
+        
+        logging.config.fileConfig('C:\workspace\MobileFramework\src\mobile_framework/log.conf')
+        self._log = logging.getLogger('connection')
+        
         pass
 
     
@@ -25,6 +32,8 @@ class MobileDevice(object):
     
     
     def disconnect(self):
+        logging.shutdown()
+        self._log.info("Closing connection with the server")
         return StormTest.ReleaseServerConnection()
     
     
