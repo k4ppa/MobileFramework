@@ -24,25 +24,28 @@ def _getDeveloperModeParams():
 
 
 def _setUpEnvironment():
+    log.info("SetUp Environment")
     if not StormTest.IsUnderDaemon():
-        log.info("Test running under daemon")
         return _setUpTestEnvironment()
     else:
-        log.info("Test not running under daemon")
         return _setUpRealEnvironment()
         
 
 def _setUpTestEnvironment():
     from mobile_framework.tests.test_environment import TestEnvironment
+    log.info("Test running under daemon, using test environment")
     server = TestEnvironment.getServerName()
     slot = TestEnvironment.getSlotNumber()
+    
     return server, slot
     
     
 def _setUpRealEnvironment(self):
+    log.info("Test not running under daemon, using real environment")
     slotAllocated = StormTest.GetPhysicalAllocations()
     server = slotAllocated[0].split(':')[0]
     slot = slotAllocated[1][0]
+    
     return server, slot
 
 
@@ -55,19 +58,19 @@ def _establishConnection(server, slot, description):
 
 def _openConnection(server, description):
     try:
-        log.info("Starting connection to server '%s'" % server)
+        log.info("Opening connection to server: '%s'" % server)
         StormTest.ConnectToServer(server, description)
     except SystemExit:
-        StormTest.EndLogRegion('Open Connection', StormTest.LogRegionStyle.Fail, comment='Failed to connect to server (%s)' % server)
         log.error("Failed to connect to server")
+        StormTest.EndLogRegion('Open Connection', StormTest.LogRegionStyle.Fail, comment='Failed to connect to server (%s)' % server)
         return False
     
-    log.info("Connection established with server")
+    log.info("Connection established with the server")
     return True
 
 
 def _reserveSlot(slot, signalDb='', serialParams=[], videoFlag=True):
-    log.info("Starting reserver slot for slot %d" % slot)
+    log.info("Starting to reserve slot %d" % slot)
     isReserved = StormTest.ReserveSlot(slot, signalDb, serialParams, videoFlag)
     if isReserved is 0:    
         StormTest.EndLogRegion('Open Connection', StormTest.LogRegionStyle.Fail, comment='Failed to reserve slot %d' % slot)
