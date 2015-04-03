@@ -72,13 +72,17 @@ def _openConnection(server, description):
 def _reserveSlot(slot, signalDb='', serialParams=[], videoFlag=True):
     log.info("Starting to reserve slot %d" % slot)
     isReserved = StormTest.ReserveSlot(slot, signalDb, serialParams, videoFlag)
+    _logReserveSlotResult(slot, isReserved)
+    
+    return isReserved 
+    
+    
+def _logReserveSlotResult(slot, isReserved):
     if isReserved is 0:    
         StormTest.EndLogRegion('Open Connection', StormTest.LogRegionStyle.Fail, comment='Failed to reserve slot %d' % slot)
         log.error('Failed to reserve slot %d' % slot)
-        return False
-    
-    log.info("Slot %d reserved" % slot)
-    return True 
+    else:
+        log.info("Slot %d reserved" % slot)
     
     
 def _isConnectionOk(isServerConnected, isSlotReserved):
