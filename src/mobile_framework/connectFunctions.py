@@ -10,9 +10,9 @@ log = logging.getLogger('connection')
 def _getTestRunConfiguration():
     StormTest.BeginLogRegion('Open Connection')
     params = WarningCenter.GetTestRun()
+    
     if params == None:     
-        return _getDeveloperModeParams()
-        
+        return _getDeveloperModeParams() 
     return params    
 
 
@@ -83,26 +83,29 @@ def _logReserveSlotResult(slot, isReserved):
         log.error('Failed to reserve slot %d' % slot)
     else:
         log.info("Slot %d reserved" % slot)
+    pass
     
     
 def _isConnectionOk(isServerConnected, isSlotReserved):
     isConnectionOk = False
     if isServerConnected and isSlotReserved:
         isConnectionOk = _OCRCheckRemainingChars()
+        
+    log.info("Connection established") if isConnectionOk else log.info("Connection failed") 
     return isConnectionOk    
     
 
 def _OCRCheckRemainingChars():
     remainingChars = StormTest.OCRGetRemainingChars()
-    log.info("Remaining OCR chars in license: %d" % remainingChars)
+    _logRemainingCharsResult(remainingChars)
     
+    return True if remainingChars else False
+
+
+def _logRemainingCharsResult(remainingChars):
+    log.info("Remaining OCR chars in license: %d" % remainingChars)
     if remainingChars is 0:    
         StormTest.EndLogRegion('Open Connection', StormTest.LogRegionStyle.Fail, comment='OCR licenses has ran out. Not possible to run tests')
         log.error("OCR licenses has ran out. Not possible to run tests")
-        return False
-    
-    log.info("Connection established")
-    return True
-
-
+    pass
 

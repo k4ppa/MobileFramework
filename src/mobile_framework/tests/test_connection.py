@@ -59,7 +59,3 @@ class TestConnection(unittest.TestCase):
         self.assertEqual(isDisconnected, True, "Device disconnection to the server failed")
         pass
     
-
-if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
-    unittest.main()
