@@ -20,9 +20,7 @@ class MobileDevice(object):
         pass
 
     
-    def connect(self, description=''):
-        StormTest.BeginLogRegion('Open Connection')
-        
+    def connect(self, description=''):    
         params = _getTestRunConfiguration()
         serviceInfo = params['service']
         

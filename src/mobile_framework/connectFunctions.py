@@ -8,13 +8,19 @@ log = logging.getLogger('connection')
 
 
 def _getTestRunConfiguration():
+    StormTest.BeginLogRegion('Open Connection')
     params = WarningCenter.GetTestRun()
     if params == None:     
-        from mobile_framework.tests.test_environment import TestEnvironment
-        params = TestEnvironment.params
-        log.info("Developer mode - using a hard coded set of parameters")
+        return _getDeveloperModeParams()
         
     return params    
+
+
+def _getDeveloperModeParams():
+    from mobile_framework.tests.test_environment import TestEnvironment
+    log.info("Developer mode - using a hard coded set of parameters")
+    
+    return TestEnvironment.params
 
 
 def _setUpEnvironment():
