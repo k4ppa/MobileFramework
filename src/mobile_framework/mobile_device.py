@@ -25,6 +25,7 @@ class MobileDevice(object):
         serviceInfo = _getTestRunConfiguration()['service']
         
         self._server, self._slot = _setUpEnvironment()
+        self._log.debug("server:slot = {}:{}".format(self._server, self._slot))
         return _establishConnection(self._server, self._slot, description)
          
     

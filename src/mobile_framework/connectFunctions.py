@@ -33,18 +33,18 @@ def _setUpEnvironment():
 
 def __setUpTestEnvironment():
     from mobile_framework.tests.test_environment import TestEnvironment
-    log.info("Test running under daemon, using test environment")
     server = TestEnvironment.getServerName()
     slot = TestEnvironment.getSlotNumber()
+    log.info("Test running under daemon, using test environment")
     
     return server, slot
     
     
 def __setUpRealEnvironment(self):
-    log.info("Test not running under daemon, using real environment")
     slotAllocated = StormTest.GetPhysicalAllocations()
     server = slotAllocated[0].split(':')[0]
-    slot = slotAllocated[1][0]
+    slot = slotAllocated[1]
+    log.info("Test not running under daemon, using real environment")
     
     return server, slot
 
