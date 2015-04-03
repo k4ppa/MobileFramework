@@ -12,11 +12,11 @@ def _getTestRunConfiguration():
     params = WarningCenter.GetTestRun()
     
     if params == None:     
-        return _getDeveloperModeParams() 
+        return __getDeveloperModeParams() 
     return params    
 
 
-def _getDeveloperModeParams():
+def __getDeveloperModeParams():
     from mobile_framework.tests.test_environment import TestEnvironment
     log.info("Developer mode - using a hard coded set of parameters")
     
@@ -26,12 +26,12 @@ def _getDeveloperModeParams():
 def _setUpEnvironment():
     log.info("SetUp Environment")
     if not StormTest.IsUnderDaemon():
-        return _setUpTestEnvironment()
+        return __setUpTestEnvironment()
     else:
-        return _setUpRealEnvironment()
+        return __setUpRealEnvironment()
         
 
-def _setUpTestEnvironment():
+def __setUpTestEnvironment():
     from mobile_framework.tests.test_environment import TestEnvironment
     log.info("Test running under daemon, using test environment")
     server = TestEnvironment.getServerName()
@@ -40,7 +40,7 @@ def _setUpTestEnvironment():
     return server, slot
     
     
-def _setUpRealEnvironment(self):
+def __setUpRealEnvironment(self):
     log.info("Test not running under daemon, using real environment")
     slotAllocated = StormTest.GetPhysicalAllocations()
     server = slotAllocated[0].split(':')[0]
@@ -50,13 +50,13 @@ def _setUpRealEnvironment(self):
 
 
 def _establishConnection(server, slot, description):
-    isServerConnected = _openConnection(server, description)
-    isSlotReserved = _reserveSlot(slot, signalDb='', serialParams=[], videoFlag=True)
+    isServerConnected = __openConnection(server, description)
+    isSlotReserved = __reserveSlot(slot, signalDb='', serialParams=[], videoFlag=True)
     
-    return _isConnectionOk(isServerConnected, isSlotReserved)
+    return __isConnectionOk(isServerConnected, isSlotReserved)
     
 
-def _openConnection(server, description):
+def __openConnection(server, description):
     try:
         log.info("Opening connection to server: '%s'" % server)
         StormTest.ConnectToServer(server, description)
@@ -69,15 +69,15 @@ def _openConnection(server, description):
     return True
 
 
-def _reserveSlot(slot, signalDb='', serialParams=[], videoFlag=True):
+def __reserveSlot(slot, signalDb='', serialParams=[], videoFlag=True):
     log.info("Starting to reserve slot %d" % slot)
     isReserved = StormTest.ReserveSlot(slot, signalDb, serialParams, videoFlag)
-    _logReserveSlotResult(slot, isReserved)
+    __logReserveSlotResult(slot, isReserved)
     
     return isReserved 
     
     
-def _logReserveSlotResult(slot, isReserved):
+def __logReserveSlotResult(slot, isReserved):
     if isReserved is 0:    
         StormTest.EndLogRegion('Open Connection', StormTest.LogRegionStyle.Fail, comment='Failed to reserve slot %d' % slot)
         log.error('Failed to reserve slot %d' % slot)
@@ -86,23 +86,23 @@ def _logReserveSlotResult(slot, isReserved):
     pass
     
     
-def _isConnectionOk(isServerConnected, isSlotReserved):
+def __isConnectionOk(isServerConnected, isSlotReserved):
     isConnectionOk = False
     if isServerConnected and isSlotReserved:
-        isConnectionOk = _OCRCheckRemainingChars()
+        isConnectionOk = __OCRCheckRemainingChars()
         
-    log.info("Connection established") if isConnectionOk else log.info("Connection failed") 
+    log.info("Connection established and slot reserved") if isConnectionOk else log.info("Connection failed") 
     return isConnectionOk    
     
 
-def _OCRCheckRemainingChars():
+def __OCRCheckRemainingChars():
     remainingChars = StormTest.OCRGetRemainingChars()
-    _logRemainingCharsResult(remainingChars)
+    __logRemainingCharsResult(remainingChars)
     
     return True if remainingChars else False
 
 
-def _logRemainingCharsResult(remainingChars):
+def __logRemainingCharsResult(remainingChars):
     log.info("Remaining OCR chars in license: %d" % remainingChars)
     if remainingChars is 0:    
         StormTest.EndLogRegion('Open Connection', StormTest.LogRegionStyle.Fail, comment='OCR licenses has ran out. Not possible to run tests')
