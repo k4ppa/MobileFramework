@@ -17,16 +17,16 @@ class TestConnection(unittest.TestCase):
         pass
 
     
-    def test_connect_device_to_the_server(self):
-        print "TEST_CONNECT_DEVICE_TO_THE_SERVER"
+    def test_connect_device_to_the_server_with_success(self):
+        print "TEST_CONNECT_DEVICE_TO_THE_SERVER_WITH_SUCCESS"
         isConnected = self.device.connect("Connect with the real server")
         
         self.assertEqual(isConnected, True, "Device connection to the server failed")
         pass
     
     
-    def test_connect_device_to_the_server_fail(self):
-        print "TEST_CONNECT_DEVICE_TO_THE_SERVER_FAIL"
+    def test_connect_device_should_fail_when_name_is_wrong(self):
+        print "TEST_CONNECT_DEVICE_SHOULD_FAIL_WHEN_NAME_IS_WRONG"
         TestEnvironment.setServerName("WrongServerName")
         isConnected = self.device.connect("Connect with non existing server")
         
@@ -34,17 +34,17 @@ class TestConnection(unittest.TestCase):
         pass
     
     
-    def test_connect_device_fail_and_reserve_slot_fail(self):
-        print "TEST_CONNECT_DEVICE_FAIL_AND_RESERVE_SLOT_FAIL"
+    def test_reserve_slot_should_fail_when_server_name_is_wrong(self):
+        print "TEST_RESERVE_SLOT_SHOULD_FAIL_WHEN_SERVER_NAME_IS_WRONG"
         TestEnvironment.setServerName("WrongServerName")
-        isConnected = self.device.connect("Connect with the real server")
+        isConnected = self.device.connect("Connect with non existing server")
         
         self.assertEqual(isConnected, False, "Connection successful")
         pass
     
     
-    def test_reserve_slot_fail_when_slot_number_is_wrong(self):
-        print "TEST_SLOT_FAIL_WHEN_SLOT_NUMBER_IS_WRONG"
+    def test_reserve_slot_should_fail_when_slot_number_is_wrong(self):
+        print "TEST_SLOT_SHOULD_FAIL_WHEN_SLOT_NUMBER_IS_WRONG"
         TestEnvironment.setSlotNumber(10)
         isConnected = self.device.connect("Connect with the real server")
         
