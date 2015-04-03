@@ -20,9 +20,9 @@ class MobileDevice(object):
         pass
 
     
-    def connect(self, description=''):    
-        params = _getTestRunConfiguration()
-        serviceInfo = params['service']
+    def connect(self, description=''):
+        self._log.info("Started connection with the server")    
+        serviceInfo = _getTestRunConfiguration()['service']
         
         self._server, self._slot = _setUpEnvironment()
         return _establishConnection(self._server, self._slot, description)
@@ -30,8 +30,8 @@ class MobileDevice(object):
     
     
     def disconnect(self):
-        logging.shutdown()
         self._log.info("Closing connection with the server")
+        logging.shutdown()
         return StormTest.ReleaseServerConnection()
     
     
