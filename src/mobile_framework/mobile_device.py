@@ -3,9 +3,9 @@ import logging.config
 
 import stormtest.ClientAPI as StormTest
 
-from mobile_framework.connectFunctions import _getTestRunConfiguration
-from mobile_framework.connectFunctions import _setUpEnvironment
-from mobile_framework.connectFunctions import _establishConnection
+from mobile_framework.connect_functions import _getTestRunConfiguration
+from mobile_framework.connect_functions import _setUpEnvironment
+from mobile_framework.connect_functions import _establishConnection
 
 from mobile_framework.user_actions_functions import _checkCoordinates
 
