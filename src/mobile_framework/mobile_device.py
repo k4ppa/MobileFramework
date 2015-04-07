@@ -7,6 +7,8 @@ from mobile_framework.connectFunctions import _getTestRunConfiguration
 from mobile_framework.connectFunctions import _setUpEnvironment
 from mobile_framework.connectFunctions import _establishConnection
 
+from mobile_framework.user_actions_functions import _checkCoordinates
+
 
 class MobileDevice(object):
     def __init__(self):
@@ -38,9 +40,8 @@ class MobileDevice(object):
     
     
     def tap(self, coordinates={'x':None,'y':None}, duration=0):
-        if isinstance(coordinates, dict):
-            if type(coordinates['x']) is int and type(coordinates['y']) is int:
-                return StormTest.PressButton("TAP:" + str(coordinates['x']) + ":" + str(coordinates['y']) + ":" + str(duration))
+        if _checkCoordinates(coordinates):
+            return StormTest.PressButton("TAP:" + str(coordinates['x']) + ":" + str(coordinates['y']) + ":" + str(duration))
         
         return False
     
