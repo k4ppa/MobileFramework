@@ -2,4 +2,5 @@
 .pydevproject
 *.pyc
 src/mobile_framework/tests/runfiles_*
+src/mobile_framework/tests/test_*
 MobileDevice.log
