@@ -18,7 +18,7 @@ class Test(unittest.TestCase):
         self.device.disconnect()
         pass
 
-
+    
     def test_start_application_by_name_should_be_successfull(self):
         print "TEST START APPLICATION BY NAME SHOULD BE SUCCESSFULL"
         isStarted = self.device.start("it.sky.river")
@@ -36,7 +36,7 @@ class Test(unittest.TestCase):
         pass
     '''
    
-   
+    
     def test_stop_application(self):
         print "TEST STOP APPLICATION"
         self.device.start("it.sky.river")
@@ -46,13 +46,33 @@ class Test(unittest.TestCase):
         pass
     
     
-    def test_tap_with_coordinates(self):
-        print "TEST TAP WITH COORDINATES"
+    def test_tap_using_coordinates(self):
+        print "TEST TAP USING COORDINATES"
         self.device.start("it.sky.river")
-        isPressed = self.device.tap(30,50,0)
+        isPressed = self.device.tap({'x':30,'y':50})
         
         self.assertEqual(isPressed, True, "Tap not happened")
         pass
+    
+    
+    def test_tap_without_using_a_dictionary_should_fail(self):
+        print "TEST TAP WITHOUT USING A DICTIONARY SHOULD FAIL"
+        self.device.start("it.sky.river")
+        isPressed = self.device.tap([30,50])
+        
+        self.assertEqual(isPressed, False, "Tap successful")
+        pass
+    
+    
+    def test_tap_using_a_dictionary_with_string_should_fail(self):
+        print "TEST TAP USING A DICTIONARY WITH STRING SHOULD FAIL"
+        self.device.start("it.sky.river")
+        isPressed = self.device.tap({'x':'30','y':'50'})
+        
+        self.assertEqual(isPressed, False, "Tap successful")
+        pass
+    
+        
    
 
 if __name__ == "__main__":

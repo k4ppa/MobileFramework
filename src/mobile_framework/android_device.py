@@ -18,9 +18,12 @@ class AndroidDevice(MobileDevice):
         return StormTest.PressButton("STOP-ANDROID")
 
     
-    def tap(self, x, y, duration):
-        return StormTest.PressButton("TAP:" + str(x) + ":" + str(y) + ":" + "duration")
-        pass
+    def tap(self, coordinates={'x':None,'y':None}, duration=0):
+        if isinstance(coordinates, dict):
+            if type(coordinates['x']) is int and type(coordinates['y']) is int:
+                return StormTest.PressButton("TAP:" + str(coordinates['x']) + ":" + str(coordinates['y']) + ":" + str(duration))
+        
+        return False
     
     
     
