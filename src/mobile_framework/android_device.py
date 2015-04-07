@@ -16,6 +16,13 @@ class AndroidDevice(MobileDevice):
     
     def stop(self):
         return StormTest.PressButton("STOP-ANDROID")
+
+    
+    def tap(self, x, y, duration):
+        return StormTest.PressButton("TAP:" + str(x) + ":" + str(y) + ":" + "duration")
+        pass
+    
+    
     
     
     
