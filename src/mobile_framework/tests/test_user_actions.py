@@ -37,6 +37,13 @@ class Test(unittest.TestCase):
     '''
    
    
+    def test_stop_application(self):
+        print "TEST_STOP_APPLICATION"
+        self.device.start("it.sky.river")
+        isStopped = self.device.stop()
+       
+        self.assertEqual(isStopped, True, "App not stopped")
+        pass
    
 
 if __name__ == "__main__":
