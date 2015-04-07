@@ -21,6 +21,7 @@ class MobileDevice(object):
 
     
     def connect(self, description=''):
+        self._log.info(description)
         self._log.info("Started connection with the server")    
         serviceInfo = _getTestRunConfiguration()['service']
         
