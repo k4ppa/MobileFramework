@@ -6,15 +6,14 @@ from mobile_framework.android_device import AndroidDevice
 
 class Test(unittest.TestCase):
 
-
     def setUp(self):
         self.device = AndroidDevice()
         self.device.connect("Connect with the real server")
-        
         pass
 
 
     def tearDown(self):
+        self.device.stop()
         self.device.disconnect()
         pass
 

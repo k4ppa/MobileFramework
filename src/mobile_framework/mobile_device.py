@@ -17,33 +17,34 @@ class MobileDevice(object):
         self._slot = 0
         
         logging.config.fileConfig('C:\workspace\MobileFramework\src\mobile_framework/log.conf')
-        self._log = logging.getLogger('connection')
+        self._connectionLog = logging.getLogger('connection')
         self._userActionLog = logging.getLogger('userAction')
-        
         pass
 
     
     def connect(self, description=''):
-        self._log.info(description)
-        self._log.info("Started connection with the server")    
+        self._connectionLog.info(description)
+        self._connectionLog.info("Started connection with the server")    
         serviceInfo = _getTestRunConfiguration()['service']
         
         self._server, self._slot = _setUpEnvironment()
-        self._log.debug("server:slot = {}:{}".format(self._server, self._slot))
+        self._connectionLog.debug("server:slot = {}:{}".format(self._server, self._slot))
         return _establishConnection(self._server, self._slot, description)
          
     
     
     def disconnect(self):
-        self._log.info("Closing connection with the server")
+        self._connectionLog.info("Closing connection with the server")
         logging.shutdown()
         return StormTest.ReleaseServerConnection()
     
     
     def tap(self, coordinates={'x':None,'y':None}, duration=0):
+        self._userActionLog.debug("Tap on ", coordinates, "with duration ", duration)
         if _checkCoordinates(coordinates):
             return StormTest.PressButton("TAP:" + str(coordinates['x']) + ":" + str(coordinates['y']) + ":" + str(duration))
         
+        self._userActionLog.warning("Parameter coordinates passed in function are not a dictionary with int values")
         return False
     
 
