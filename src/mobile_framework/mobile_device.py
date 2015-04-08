@@ -39,10 +39,10 @@ class MobileDevice(object):
         return StormTest.ReleaseServerConnection()
     
     
-    def tap(self, coordinates={'x':None,'y':None}, duration=0):
-        self._userActionLog.debug("Tap on ", coordinates, "with duration ", duration)
+    def tap(self, coordinates={'x':None,'y':None, 'time':0}, mappedText=''):
+        self._userActionLog.debug("Tap on ", coordinates)
         if _checkCoordinates(coordinates):
-            return StormTest.PressButton("TAP:" + str(coordinates['x']) + ":" + str(coordinates['y']) + ":" + str(duration))
+            return StormTest.PressButton("TAP:" + str(coordinates['x']) + ":" + str(coordinates['y']) + ":" + str(coordinates['time']))
         
         self._userActionLog.warning("Parameter coordinates passed in function are not a dictionary with int values")
         return False

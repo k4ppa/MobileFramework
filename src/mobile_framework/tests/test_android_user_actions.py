@@ -1,6 +1,8 @@
 
 import unittest
 
+import stormtest.ClientAPI as StormTest
+
 from mobile_framework.android_device import AndroidDevice
 
 
@@ -48,16 +50,16 @@ class Test(unittest.TestCase):
     def test_tap_using_coordinates(self):
         print "TEST TAP USING COORDINATES"
         self.device.start("it.sky.river")
-        isPressed = self.device.tap({'x':30,'y':50})
+        isPressed = self.device.tap({'x':30,'y':50,'time':0})
         
-        self.assertEqual(isPressed, True, "Tap not happened")
+        self.assertEqual(isPressed, True, "Tap failed")
         pass
     
     
     def test_tap_without_using_a_dictionary_should_fail(self):
         print "TEST TAP WITHOUT USING A DICTIONARY SHOULD FAIL"
         self.device.start("it.sky.river")
-        isPressed = self.device.tap([30,50])
+        isPressed = self.device.tap([30,50,0])
         
         self.assertEqual(isPressed, False, "Tap successful")
         pass
@@ -66,13 +68,22 @@ class Test(unittest.TestCase):
     def test_tap_using_a_dictionary_with_string_should_fail(self):
         print "TEST TAP USING A DICTIONARY WITH STRING SHOULD FAIL"
         self.device.start("it.sky.river")
-        isPressed = self.device.tap({'x':'30','y':'50'})
+        isPressed = self.device.tap({'x':'30','y':'50','time':'0'})
         
         self.assertEqual(isPressed, False, "Tap successful")
         pass
     
+    '''    
+    def test_tap_using_mapped_text(self):
+        print "TEST TAP USING TEXT"
+        self.device.start("it.sky.river")
+        StormTest.WaitSec(15);
+        isPressed = self.device.tap(mappedText='Menu')
         
-   
+        self.assertEqual(isPressed, True, "Tap failed")
+        pass
+    '''   
+        
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
