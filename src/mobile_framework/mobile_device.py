@@ -18,6 +18,7 @@ class MobileDevice(object):
         
         logging.config.fileConfig('C:\workspace\MobileFramework\src\mobile_framework/log.conf')
         self._log = logging.getLogger('connection')
+        self._userActionLog = logging.getLogger('userAction')
         
         pass
 
