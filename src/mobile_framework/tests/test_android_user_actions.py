@@ -8,15 +8,19 @@ from mobile_framework.android_device import AndroidDevice
 
 class Test(unittest.TestCase):
 
-    def setUp(self):
-        self.device = AndroidDevice()
-        self.device.connect("Connect with the real server")
+    @classmethod
+    def setUpClass(cls):
+        super(Test, cls).setUpClass()
+        cls.device = AndroidDevice()
+        cls.device.connect("Connect with the real server")
         pass
 
 
-    def tearDown(self):
-        self.device.stop()
-        self.device.disconnect()
+    @classmethod
+    def tearDownClass(cls):
+        super(Test, cls).tearDownClass()
+        cls.device.stop()
+        cls.device.disconnect()
         pass
 
     
@@ -82,7 +86,7 @@ class Test(unittest.TestCase):
         
         self.assertEqual(isPressed, True, "Tap failed")
         pass
-    '''   
+    '''  
         
 
 if __name__ == "__main__":

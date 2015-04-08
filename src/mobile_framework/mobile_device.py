@@ -39,8 +39,8 @@ class MobileDevice(object):
         return StormTest.ReleaseServerConnection()
     
     
-    def tap(self, coordinates={'x':None,'y':None, 'time':0}, mappedText=''):
-        self._userActionLog.debug("Tap on ", coordinates)
+    def tap(self, coordinates=None, mappedText=''):
+        #self._userActionLog.debug("Tap on ", coordinates)
         if _checkCoordinates(coordinates):
             return StormTest.PressButton("TAP:" + str(coordinates['x']) + ":" + str(coordinates['y']) + ":" + str(coordinates['time']))
         
