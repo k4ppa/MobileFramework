@@ -7,7 +7,9 @@ from mobile_framework.connect_functions import _getTestRunConfiguration
 from mobile_framework.connect_functions import _setUpEnvironment
 from mobile_framework.connect_functions import _establishConnection
 
-from mobile_framework.user_actions_functions import _checkCoordinates
+from mobile_framework.user_actions_functions import _tapWithCoordinates
+from mobile_framework.user_actions_functions import _tapWithMappedText
+from mobile_framework.user_actions_functions import _tapWithText
 
 
 class MobileDevice(object):
@@ -41,22 +43,15 @@ class MobileDevice(object):
     
     def tap(self, coordinates=None, mappedText='', text=''):
         if coordinates is not None:
-            self._userActionLog.debug("Tap on '{0}'".format(coordinates))
-            if _checkCoordinates(coordinates):
-                return StormTest.PressButton("TAP:" + str(coordinates['x']) + ":" + str(coordinates['y']) + ":" + str(coordinates['time']))
-        
-            self._userActionLog.warning("Parameter coordinates passed in function are not a dictionary with int values")
-            return False
-        
+            isPressed = _tapWithCoordinates(coordinates)
+            
         if mappedText is not '':
-            self._userActionLog.debug("Tap on '{0}'".format(mappedText))
-            return StormTest.PressButton(mappedText)
-        
+            isPressed = _tapWithMappedText(mappedText)
+            
         if text is not '':
-            self._userActionLog.debug("Tap on '{0}'".format(text))
-            print "TAPELEMENT:text:'{0}'".format(text)
-            return StormTest.PressButton("TAPELEMENT:text:{0}".format(text))
-        pass
+            isPressed = _tapWithText(text)
+        
+        return isPressed
 
     
 
