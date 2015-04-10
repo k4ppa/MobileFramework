@@ -12,7 +12,7 @@ def __coordinatesAreInt(coordinates):
 
 
 def _tapWithCoordinates(coordinates):
-    log.debug("Tap on '{0}'".format(coordinates))
+    log.debug("Tap on {0}".format(coordinates))
     if __checkCoordinates(coordinates):
         return StormTest.PressButton("TAP:" + str(coordinates['x']) + ":" + str(coordinates['y']) + ":" + str(coordinates['time']))
 
@@ -28,13 +28,12 @@ def __checkCoordinates(coordinates):
 
 
 def _tapWithMappedText(mappedText):
-    log.debug("Tap on '{0}'".format(mappedText))
+    log.debug("Tap on {0}".format(mappedText))
     return StormTest.PressButton(mappedText)
 
 
 def _tapWithText(text):
-    log.debug("Tap on '{0}'".format(text))
-    print "TAPELEMENT:text:'{0}'".format(text)
+    log.debug("Tap on {0}".format(text))
     
     return StormTest.PressButton("TAPELEMENT:text:{0}".format(text))
     

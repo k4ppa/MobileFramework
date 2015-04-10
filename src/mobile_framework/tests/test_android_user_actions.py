@@ -13,6 +13,8 @@ class Test(unittest.TestCase):
         super(Test, self).setUpClass()
         self.device = AndroidDevice()
         self.device.connect("Connect with the real server")
+        self.device.start("it.sky.river")
+        StormTest.WaitSec(3)
         pass
 
 
@@ -21,17 +23,6 @@ class Test(unittest.TestCase):
         super(Test, cls).tearDownClass()
         cls.device.stop()
         cls.device.disconnect()
-        pass
-
-
-    def setUp(self):
-        self.device.start("it.sky.river")
-        StormTest.WaitSec(3)
-        pass
-    
-    
-    def tearDown(self):
-        #self.device.stop()
         pass
     
     
@@ -42,16 +33,7 @@ class Test(unittest.TestCase):
         
         self.assertEqual(isStarted, True, "App not started")
         pass
-    
-       
-    ''' 
-    def test_start_application_with_mapped_name_should_be_successfull(self):
-        print "TEST_START_APPLICATION_WITH_MAPPED_NAME_SHOULD_BE_SUCCESSFULL"
-        isStarted = self.device.start()
-        
-        self.assertEqual(isStarted, True, "App not started")
-        pass
-    '''
+   
    
     @unittest.skip("Test useless (no logic involved in code)")
     def test_stop_application(self):
@@ -67,9 +49,19 @@ class Test(unittest.TestCase):
         print "TEST TAP USING COORDINATES"
         isPressed = self.device.tap(coordinates={'x':30,'y':50,'time':0})
         StormTest.WaitSec(3)
+        '''
+        isHomeOpen = StormTest.WaitColorMatch((210,210,210), tolerances = (16,16,16), includedAreas=[800,550,10,10], flatness=95, peakError=1, timeToWait=5)
+        image=isHomeOpen[0][2]
+        pilImage = image.ToPILImage()
+        pilImage.save("ciaoPIL.jpg")
+        img = pilImage.resize((1280, 800), PIL.Image.ANTIALIAS)
+        img.save('resized_image.jpg')
+        print isHomeOpen
+        '''
         self.device.tap(coordinates={'x':320,'y':50,'time':0})
         
         self.assertEqual(isPressed, True, "Tap failed")
+        #self.assertEqual(isHomeOpen[0][1], True, "Home not open")
         pass
     
     

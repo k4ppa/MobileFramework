@@ -17,7 +17,7 @@ class MobileDevice(object):
         self._server = ""
         self._description = ""
         self._slot = 0
-        
+
         logging.config.fileConfig('C:\workspace\MobileFramework\src\mobile_framework/log.conf')
         self._connectionLog = logging.getLogger('connection')
         self._userActionLog = logging.getLogger('userAction')
