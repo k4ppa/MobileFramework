@@ -2,17 +2,18 @@
 import unittest
 
 from mobile_framework.tests.test_environment import TestEnvironment
-from mobile_framework.mobile_device import MobileDevice
+from mobile_framework.android_device import AndroidDevice
 
 class TestConnection(unittest.TestCase):
     
 
     def setUp(self):
-        self.device = MobileDevice()
+        self.device = AndroidDevice("samsung_galaxy_tab_3")
         pass
 
     
     def tearDown(self):
+        TestEnvironment.setSlotNumber(1)
         self.device.disconnect()
         pass
 
@@ -57,5 +58,24 @@ class TestConnection(unittest.TestCase):
         isDisconnected = self.device.disconnect()  
          
         self.assertEqual(isDisconnected, True, "Device disconnection to the server failed")
+        pass
+    
+    
+    def test_start_application_by_name_should_be_successfull(self):
+        print "TEST START APPLICATION BY NAME SHOULD BE SUCCESSFULL"
+        self.device.connect("Connect with the real server")
+        isStarted = self.device.start("it.sky.river")
+        
+        self.assertEqual(isStarted, True, "App not started")
+        pass
+   
+   
+    def test_stop_application(self):
+        print "TEST STOP APPLICATION"
+        self.device.connect("Connect with the real server")
+        self.device.start("it.sky.river")
+        isStopped = self.device.stop()
+       
+        self.assertEqual(isStopped, True, "App not stopped")
         pass
     
