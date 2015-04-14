@@ -37,21 +37,6 @@ class Test(unittest.TestCase):
         self.assertEqual(isPressed, True, "Tap failed")
         pass
     
-    @unittest.skip("Test fail because tap with mapped text doesn't work")  
-    def test_tap_without_using_a_dictionary_should_fail(self):
-        print "TEST TAP WITHOUT USING A DICTIONARY SHOULD FAIL"
-        isPressed = self.device.tap(coordinates=[30,50,0])
-        
-        self.assertEqual(isPressed, False, "Tap successful")
-        pass
-    
-    @unittest.skip("Test fail because tap with mapped text doesn't work")  
-    def test_tap_using_a_dictionary_with_string_should_fail(self):
-        print "TEST TAP USING A DICTIONARY WITH STRING SHOULD FAIL"
-        isPressed = self.device.tap(coordinates={'x':'30','y':'50','time':'0'})
-        
-        self.assertEqual(isPressed, False, "Tap successful")
-        pass
     
     @unittest.expectedFailure  
     @unittest.skip("Test fail because tap with mapped text doesn't work")  
