@@ -4,9 +4,9 @@ class TestEnvironment(object):
     serverName = "s15016hv01"
     slotNumber = 1
     
-    params = {"service": {"displayName": "An iPad Service",
+    params = {"service": {"displayName": "Android mobile service",
                                             "id": 21,
-                                            "name": "iPadService",
+                                            "name": "SamsungTab3Service",
                                             "number": "",
                                             "tags": [],
                                             "type": "linear"
