@@ -1,6 +1,6 @@
 
 
-class AndroidCoordinates(object):
+class AndroidCommands(object):
 
 
     def __init__(self):

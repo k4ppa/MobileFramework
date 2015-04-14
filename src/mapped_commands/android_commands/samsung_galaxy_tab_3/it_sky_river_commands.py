@@ -3,16 +3,16 @@ import logging
 
 import stormtest.ClientAPI as StormTest
 
-from mapped_coordinates.android_coordinates.samsung_galaxy_tab_3.device_coordinates import DeviceCoordinates
+from mapped_commands.android_commands.samsung_galaxy_tab_3.device_commands import DeviceCommands
 
 
 log = logging.getLogger('userAction')
 
-class itSkyRiverCoordinates(DeviceCoordinates):
+class appCommands(DeviceCommands):
     
     
     def __init__(self):
-        super(DeviceCoordinates, self).__init__()
+        super(DeviceCommands, self).__init__()
         
         self.commands = {
                     'openMenu':{'x':30, 'y':50, 'time':0},

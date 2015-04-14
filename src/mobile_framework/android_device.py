@@ -6,27 +6,19 @@ from mobile_framework.user_actions_functions import _tapWithText
 
 import importlib
 
-from mapped_coordinates.android_coordinates.samsung_galaxy_tab_3.it_sky_river_coordinates import itSkyRiverCoordinates
-
 
 class AndroidDevice(MobileDevice):
     
     def __init__(self, deviceName):
         super(AndroidDevice, self).__init__()
         self._appName = ''
-        self.skyOnlineCoordinates = None
+        self._appCommands = None
         
-        #rawData = StormTest.GetFacilityData('S15016HV01')
-        #stbField = StormTest.GetStbField(rawData, 'S15016HV01', 1, 'all')
-        #print stbField
-        #model = stbField['Model'].lower().replace(' ', '_')
-        #app = stbField['IRDefinition']
-        self.module = "mapped_coordinates.android_coordinates.{0}".format(deviceName)
+        self.deviceCommandsModule = "mapped_commands.android_commands.{0}".format(deviceName)
         try:
-            command_module = importlib.import_module(self.module + ".device_coordinates")
-            getattr(command_module, 'DeviceCoordinates') 
+            importlib.import_module(self.deviceCommandsModule + ".device_commands") 
         except ImportError:
-            print "Fail to import mapped coordinates: {0}".format(self.module)
+            print "Fail to import device mapped commands: {0}".format(self.deviceCommandsModule)
         pass
     
     
@@ -35,12 +27,13 @@ class AndroidDevice(MobileDevice):
         
         moduleName = appName.replace(".", "_")
         try:
-            self.module += ".{0}_coordinates".format(moduleName)
-            command_module = importlib.import_module(self.module)
-            self.skyOnlineCoordinates = itSkyRiverCoordinates()
+            self.deviceCommandsModule += ".{0}_commands".format(moduleName)
+            self.appCommandsModule = importlib.import_module(self.deviceCommandsModule)
+            print self.appCommandsModule
         except ImportError:
-            print "Fail to import mapped coordinates: {0}".format(self.module)
+            print "Fail to import app mapped commands: {0}".format(self.deviceCommandsModule)
         
+        self._appCommands = self.appCommandsModule.appCommands()
         self._userActionLog.info("Started application %s" % self._appName)
         return StormTest.PressButton("START-ANDROID:" + self._appName)
 
@@ -54,7 +47,7 @@ class AndroidDevice(MobileDevice):
         if text:
             return _tapWithText(text)
         
-        return super(AndroidDevice, self).tap(self.skyOnlineCoordinates, mappedText)
+        return super(AndroidDevice, self).tap(self._appCommands, mappedText)
     
     
     
