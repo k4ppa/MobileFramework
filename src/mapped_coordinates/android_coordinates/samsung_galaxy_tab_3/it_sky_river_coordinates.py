@@ -16,8 +16,8 @@ class itSkyRiverCoordinates(DeviceCoordinates):
         
         self.commands = {
                     'openMenu':{'x':30, 'y':50, 'time':0},
-                    'closeMenu':{'x':635,'y':55,'time':0},
-                    'boh':{'x':320,'y':50,'time':0}
+                    'closeMenu':{'x':320,'y':50,'time':0},
+                    'Home':{'x':635,'y':55,'time':0}
                     #'':{'x':, 'y':, 'time':}
                     } 
         

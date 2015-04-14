@@ -26,23 +26,11 @@ class Test(unittest.TestCase):
         pass
     
     
-    def test_tap_using_coordinates(self):
+    def test_tap_using_mapped_text(self):
         print "TEST TAP USING COORDINATES"
-        #isPressed = self.device.tap(coordinates={'x':30,'y':50,'time':0})
         isPressed = self.device.tap(mappedText='openMenu')
         StormTest.WaitSec(3)
-        #self.device.tap(coordinates={'x':320,'y':50,'time':0})
-        self.device.tap(mappedText='boh')
-        
-        self.assertEqual(isPressed, True, "Tap failed")
-        pass
-    
-    
-    @unittest.expectedFailure  
-    @unittest.skip("Test fail because tap with mapped text doesn't work")  
-    def test_tap_using_mapped_text(self):
-        print "TEST TAP USING TEXT"
-        isPressed = self.device.tap(mappedText='Menu')
+        self.device.tap(mappedText='closeMenu')
         
         self.assertEqual(isPressed, True, "Tap failed")
         pass
@@ -50,13 +38,11 @@ class Test(unittest.TestCase):
     
     def test_tap_element_using_text(self):
         print "TEST TAP ELEMENT USING TEXT"
-        #self.device.tap(coordinates={'x':30,'y':50,'time':0})
         self.device.tap(mappedText='openMenu')
         StormTest.WaitSec(3)
         isCinemaPressed = self.device.tap(text='Cinema')
         StormTest.WaitSec(3)
-        #self.device.tap(coordinates={'x':635,'y':55,'time':0})
-        self.device.tap(mappedText='closeMenu')
+        self.device.tap(mappedText='Home')
         StormTest.WaitSec(5)
         
         self.assertEqual(isCinemaPressed, True, "Tap on Cinema failed")
