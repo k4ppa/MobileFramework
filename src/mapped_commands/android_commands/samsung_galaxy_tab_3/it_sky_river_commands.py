@@ -8,7 +8,7 @@ from mapped_commands.android_commands.samsung_galaxy_tab_3.device_commands impor
 
 log = logging.getLogger('userAction')
 
-class appCommands(DeviceCommands):
+class AppCommands(DeviceCommands):
     
     
     def __init__(self):

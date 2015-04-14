@@ -3,33 +3,27 @@ import stormtest.ClientAPI as StormTest
 
 from mobile_framework.mobile_device import MobileDevice
 from mobile_framework.user_actions_functions import _tapWithText
-from mobile_framework.user_actions_functions import _importDeviceCommands
-
-import importlib
+from mobile_framework.user_actions_functions import _loadDeviceCommands
+from mobile_framework.user_actions_functions import _loadAppCommands
 
 
 class AndroidDevice(MobileDevice):
     
     def __init__(self, deviceName):
         super(AndroidDevice, self).__init__()
-        self._appName = ''
-        self._appCommands = None
         
-        self.deviceCommandsModule = _importDeviceCommands(deviceName)
+        self._deviceName = deviceName
+        self._appName = ''
+        self._commandsModuleName = "mapped_commands.android_commands.{0}".format(self._deviceName)
+        
+        self._commands = _loadDeviceCommands(self._commandsModuleName)
         pass
     
     
     def start(self, appName=''):
         self._appName = appName
-        
-        moduleName = appName.replace(".", "_")
-        try:
-            self.deviceCommandsModule += ".{0}_commands".format(moduleName)
-            self.appCommandsModule = importlib.import_module(self.deviceCommandsModule)
-        except ImportError:
-            print "Fail to import app mapped commands: {0}".format(self.deviceCommandsModule)
-        
-        self._appCommands = self.appCommandsModule.appCommands()
+        self._commands = _loadAppCommands(appName, self._commandsModuleName)
+                                               
         self._userActionLog.info("Started application %s" % self._appName)
         return StormTest.PressButton("START-ANDROID:" + self._appName)
 
@@ -43,7 +37,7 @@ class AndroidDevice(MobileDevice):
         if text:
             return _tapWithText(text)
         
-        return super(AndroidDevice, self).tap(self._appCommands, mappedText)
+        return super(AndroidDevice, self).tap(self._commands, mappedText)
     
     
     

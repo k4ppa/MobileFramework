@@ -14,7 +14,7 @@ class Test(unittest.TestCase):
         self.device = AndroidDevice("samsung_galaxy_tab_3")
         self.device.connect("Connect with the real server")
         self.device.start("it.sky.river")
-        StormTest.WaitSec(3)
+        StormTest.WaitSec(4)
         pass
 
 
@@ -29,7 +29,7 @@ class Test(unittest.TestCase):
     def test_tap_using_mapped_text(self):
         print "TEST TAP USING COORDINATES"
         isPressed = self.device.tap(mappedText='openMenu')
-        StormTest.WaitSec(3)
+        StormTest.WaitSec(4)
         self.device.tap(mappedText='closeMenu')
         
         self.assertEqual(isPressed, True, "Tap failed")
@@ -39,11 +39,11 @@ class Test(unittest.TestCase):
     def test_tap_element_using_text(self):
         print "TEST TAP ELEMENT USING TEXT"
         self.device.tap(mappedText='openMenu')
-        StormTest.WaitSec(3)
+        StormTest.WaitSec(4)
         isCinemaPressed = self.device.tap(text='Cinema')
-        StormTest.WaitSec(3)
+        StormTest.WaitSec(4)
         self.device.tap(mappedText='Home')
-        StormTest.WaitSec(5)
+        StormTest.WaitSec(6)
         
         self.assertEqual(isCinemaPressed, True, "Tap on Cinema failed")
         pass
