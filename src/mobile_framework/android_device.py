@@ -3,6 +3,7 @@ import stormtest.ClientAPI as StormTest
 
 from mobile_framework.mobile_device import MobileDevice
 from mobile_framework.user_actions_functions import _tapWithText
+from mobile_framework.user_actions_functions import _importDeviceCommands
 
 import importlib
 
@@ -14,11 +15,7 @@ class AndroidDevice(MobileDevice):
         self._appName = ''
         self._appCommands = None
         
-        self.deviceCommandsModule = "mapped_commands.android_commands.{0}".format(deviceName)
-        try:
-            importlib.import_module(self.deviceCommandsModule + ".device_commands") 
-        except ImportError:
-            print "Fail to import device mapped commands: {0}".format(self.deviceCommandsModule)
+        self.deviceCommandsModule = _importDeviceCommands(deviceName)
         pass
     
     
@@ -29,7 +26,6 @@ class AndroidDevice(MobileDevice):
         try:
             self.deviceCommandsModule += ".{0}_commands".format(moduleName)
             self.appCommandsModule = importlib.import_module(self.deviceCommandsModule)
-            print self.appCommandsModule
         except ImportError:
             print "Fail to import app mapped commands: {0}".format(self.deviceCommandsModule)
         

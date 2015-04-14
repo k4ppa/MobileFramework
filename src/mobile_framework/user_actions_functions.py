@@ -2,6 +2,7 @@
 import logging
 
 import stormtest.ClientAPI as StormTest
+import importlib
 
 
 log = logging.getLogger('userAction')
@@ -31,6 +32,15 @@ def _tapWithMappedText(mappedText):
     log.debug("Tap on {0}".format(mappedText))
     return StormTest.PressButton(mappedText)
 '''
+
+def _importDeviceCommands(deviceName):
+    deviceCommandsModule = "mapped_commands.android_commands.{0}".format(deviceName)
+    try:
+        importlib.import_module(deviceCommandsModule + ".device_commands") 
+    except ImportError:
+        print "Fail to import device mapped commands: {0}".format(deviceCommandsModule)
+    return deviceCommandsModule
+
 
 def _tapWithText(text):
     log.debug("Tap on {0}".format(text))
