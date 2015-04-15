@@ -70,9 +70,9 @@ class Test(unittest.TestCase):
         print "TEST TAP ELEMENT USING DESC"
         self.device.stop()
         StormTest.WaitSec(2)
-        isPressed = PressButton("TAPELEMENT:text:Sky Online")
+        isPressed = PressButton("TAPELEMENT:desc:Sky Online")
+        StormTest.WaitSec(4)
         
-        self.device.start("it.sky.river")
         self.assertEqual(isPressed, True, "Tap failed")
         pass
     
@@ -85,6 +85,7 @@ class Test(unittest.TestCase):
         isPressed = self.device.tap(index=3)
         StormTest.WaitSec(4)
         
+        self.device.start("it.sky.river")
         self.assertEqual(isPressed, True, "Tap failed")
         pass
     
