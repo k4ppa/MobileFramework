@@ -28,7 +28,7 @@ class Test(unittest.TestCase):
     
     
     def test_tap_using_mapped_text(self):
-        print "TEST TAP USING COORDINATES"
+        print "TEST TAP MAPPED TEXT"
         isPressed = self.device.tap(mappedText='openMenu')
         StormTest.WaitSec(4)
         self.device.tap(mappedText='closeMenu')
@@ -65,6 +65,7 @@ class Test(unittest.TestCase):
         pass
     
     
+    '''
     @unittest.expectedFailure
     def test_tap_element_using_desc(self):
         print "TEST TAP ELEMENT USING DESC"
@@ -88,7 +89,7 @@ class Test(unittest.TestCase):
         self.device.start("it.sky.river")
         self.assertEqual(isPressed, True, "Tap failed")
         pass
-    
+    '''
     
 
 if __name__ == "__main__":
