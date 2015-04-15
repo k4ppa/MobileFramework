@@ -31,7 +31,10 @@ class AndroidDevice(MobileDevice):
     
     def stop(self):
         self._userActionLog.info("Stopped application %s" % self._appName)
-        return StormTest.PressButton("STOP-ANDROID")
+        if not StormTest.PressButton("STOP-ANDROID"):
+            self._userActionLog.error("Stop application failed. Disconnection will continue")
+        return self.disconnect()
+        
 
     
     def tap(self, mappedText=None, text=None, desc=None, index=None):
