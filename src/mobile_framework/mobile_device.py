@@ -9,9 +9,8 @@ from mobile_framework.connect_functions import _establishConnection
 from mobile_framework.common_user_actions_functions import _tapWithMappedText
 
 
-log = logging.getLogger('userAction')
-
 class MobileDevice(object):
+    
     def __init__(self):
         self._server = ""
         self._description = ""
@@ -30,7 +29,6 @@ class MobileDevice(object):
         
         self._server, self._slot = _setUpEnvironment()
         self._connectionLog.debug("server:slot = {}:{}".format(self._server, self._slot))
-        
         return _establishConnection(self._server, self._slot, description)     
     
     

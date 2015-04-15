@@ -4,7 +4,6 @@ import unittest
 import stormtest.ClientAPI as StormTest
 
 from mobile_framework.android_device import AndroidDevice
-from stormtest.ClientAPI import PressButton
 
 
 class Test(unittest.TestCase):
@@ -71,8 +70,9 @@ class Test(unittest.TestCase):
         print "TEST TAP ELEMENT USING DESC"
         self.device.stop()
         StormTest.WaitSec(2)
-        isPressed = PressButton("TAPELEMENT:desc:Sky Online")
+        isPressed = self.device.tap(mappedText="Sky Online")
         StormTest.WaitSec(4)
+        
         
         self.assertEqual(isPressed, True, "Tap failed")
         pass

@@ -14,7 +14,6 @@ class AppCommands(DeviceCommands):
                     'Home':{'x':635,'y':55,'time':0}
                     #'':{'x':, 'y':, 'time':}
                     } 
-        
         pass
     
     
