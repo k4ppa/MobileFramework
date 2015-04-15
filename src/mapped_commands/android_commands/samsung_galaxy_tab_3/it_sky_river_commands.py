@@ -1,12 +1,6 @@
 
-import logging
-
-import stormtest.ClientAPI as StormTest
-
 from mapped_commands.android_commands.samsung_galaxy_tab_3.device_commands import DeviceCommands
 
-
-log = logging.getLogger('userAction')
 
 class AppCommands(DeviceCommands):
     
@@ -24,11 +18,9 @@ class AppCommands(DeviceCommands):
         pass
     
     
-    def _tapWithMappedText(self, mappedText):
-        log.debug("Tap on {0}".format(self.commands[mappedText]))
-        
-        command = self.commands[mappedText]
-        return StormTest.PressButton('TAP:{0}:{1}:{2}'.format(command['x'], command['y'], command['time']))
+    def getCommands(self):
+        return self.commands
+    
   
         
     

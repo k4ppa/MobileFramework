@@ -15,13 +15,13 @@ class AndroidDevice(MobileDevice):
         self._appName = ''
         self._commandsModuleName = "mapped_commands.android_commands.{0}".format(self._deviceName)
         
-        self._commands = _loadDeviceCommands(self._commandsModuleName)
+        self._appCommands = _loadDeviceCommands(self._commandsModuleName)
         pass
     
     
     def start(self, appName=''):
         self._appName = appName
-        self._commands = _loadAppCommands(appName, self._commandsModuleName)
+        self._appCommands = _loadAppCommands(appName, self._commandsModuleName)
                                                
         self._userActionLog.info("Started application %s" % self._appName)
         return StormTest.PressButton("START-ANDROID:" + self._appName)
@@ -42,7 +42,7 @@ class AndroidDevice(MobileDevice):
         if index:
             return _tapWithIndex(index)
         
-        return super(AndroidDevice, self).tap(self._commands, mappedText)
+        return super(AndroidDevice, self).tap(self._appCommands, mappedText)
     
     
     

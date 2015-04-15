@@ -8,6 +8,8 @@ from mobile_framework.connect_functions import _setUpEnvironment
 from mobile_framework.connect_functions import _establishConnection
 
 
+log = logging.getLogger('userAction')
+
 class MobileDevice(object):
     def __init__(self):
         self._server = ""
@@ -37,10 +39,15 @@ class MobileDevice(object):
         return StormTest.ReleaseServerConnection()
     
     
-    def tap(self, commands, mappedText=None):          
+    def tap(self, appCommands, mappedText=None):       
+        commands = appCommands.getCommands()  
         if mappedText:
-            return commands._tapWithMappedText(mappedText)
+            return self._tapWithMappedText(commands, mappedText)
 
     
-
+    def _tapWithMappedText(self, commands, mappedText):
+        log.debug("Tap on {0}".format(commands[mappedText]))
+        
+        command = commands[mappedText]
+        return StormTest.PressButton('TAP:{0}:{1}:{2}'.format(command['x'], command['y'], command['time']))
 
