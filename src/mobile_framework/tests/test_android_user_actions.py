@@ -12,7 +12,7 @@ class Test(unittest.TestCase):
     def setUpClass(self):
         super(Test, self).setUpClass()
         self.device = AndroidDevice("samsung_galaxy_tab_3")
-        self.device.connect("Connect with the real server")
+        #self.device.connect("Connect with the real server")
         self.device.start("it.sky.river")
         StormTest.WaitSec(4)
         pass

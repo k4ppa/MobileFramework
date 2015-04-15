@@ -22,7 +22,9 @@ class AndroidDevice(MobileDevice):
     def start(self, appName=''):
         self._appName = appName
         self._appCommands = _loadAppCommands(appName, self._commandsModuleName)
-                                               
+                             
+        self.connect('')
+                          
         self._userActionLog.info("Started application %s" % self._appName)
         return StormTest.PressButton("START-ANDROID:" + self._appName)
 
