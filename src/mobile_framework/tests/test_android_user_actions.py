@@ -4,6 +4,7 @@ import unittest
 import stormtest.ClientAPI as StormTest
 
 from mobile_framework.android_device import AndroidDevice
+from stormtest.ClientAPI import PressButton
 
 
 class Test(unittest.TestCase):
@@ -47,7 +48,47 @@ class Test(unittest.TestCase):
         
         self.assertEqual(isCinemaPressed, True, "Tap on Cinema failed")
         pass
+    
+    
+    def test_import_non_existent_device_commands_module_should_throw_an_exception(self):
+        print "TEST IMPORT NON EXISTENT DEVICE COMMANDS MODULE SHOULD THROW AN EXCEPTION"
         
+        self.assertRaises(ImportError, AndroidDevice, "samsung_galaxy_fake")
+        pass
+    
+    
+    def test_import_non_existent_app_commands_module_should_throw_an_exception(self):
+        print "TEST IMPORT NON EXISTENT APP COMMANDS MODULE SHOULD THROW AN EXCEPTION"
+        newDevice = AndroidDevice("samsung_galaxy_tab_3")
+        
+        self.assertRaises(ImportError, newDevice.start, "fake_app")
+        pass
+    
+    
+    @unittest.expectedFailure
+    def test_tap_element_using_desc(self):
+        print "TEST TAP ELEMENT USING DESC"
+        self.device.stop()
+        StormTest.WaitSec(2)
+        isPressed = PressButton("TAPELEMENT:text:Sky Online")
+        
+        self.device.start("it.sky.river")
+        self.assertEqual(isPressed, True, "Tap failed")
+        pass
+    
+    
+    @unittest.expectedFailure
+    def test_tap_element_using_index(self):
+        print "TEST TAP ELEMENT USING INDEX"
+        self.device.stop()
+        StormTest.WaitSec(4)
+        isPressed = self.device.tap(index=3)
+        StormTest.WaitSec(4)
+        
+        self.assertEqual(isPressed, True, "Tap failed")
+        pass
+    
+    
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

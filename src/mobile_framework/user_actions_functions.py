@@ -16,8 +16,8 @@ def __importDeviceModule(deviceCommandsModule):
     try:
         return importlib.import_module(deviceCommandsModule + ".device_commands")
     except ImportError:
-        print "Fail to import device mapped commands: {0}".format(deviceCommandsModule)
-        pass
+        log.error("Fail to import device mapped commands: {0}".format(deviceCommandsModule))
+        raise 
     
 
 def _loadAppCommands(appName, deviceModuleName):
@@ -36,15 +36,26 @@ def __importAppModule(deviceCommandsModule):
     try:
         return importlib.import_module(deviceCommandsModule)
     except ImportError:
-        print "Fail to import app mapped commands: {0}".format(deviceCommandsModule)
-    pass
+        log.error("Fail to import app mapped commands: {0}".format(deviceCommandsModule))
+        raise
 
 
 def _tapWithText(text):
-    log.debug("Tap on {0}".format(text))
+    log.debug("Tap on text {0}".format(text))
     return StormTest.PressButton("TAPELEMENT:text:{0}".format(text))
     
     
+def _tapWithDesc(desc):
+    log.debug("Tap on desc{0}".format(desc))
+    return StormTest.PressButton("TAPELEMENT:desc:{0}".format(desc))
     
     
+def _tapWithIndex(index):
+    log.debug("Tap on index {0}".format(index))
+    return StormTest.PressButton("TAPELEMENT:index:{0}".format(index))
+
+
+
+
+
     

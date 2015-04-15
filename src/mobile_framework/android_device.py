@@ -2,9 +2,8 @@
 import stormtest.ClientAPI as StormTest
 
 from mobile_framework.mobile_device import MobileDevice
-from mobile_framework.user_actions_functions import _tapWithText
-from mobile_framework.user_actions_functions import _loadDeviceCommands
-from mobile_framework.user_actions_functions import _loadAppCommands
+from mobile_framework.user_actions_functions import _tapWithText, _tapWithIndex, _tapWithDesc
+from mobile_framework.user_actions_functions import _loadDeviceCommands, _loadAppCommands
 
 
 class AndroidDevice(MobileDevice):
@@ -33,9 +32,15 @@ class AndroidDevice(MobileDevice):
         return StormTest.PressButton("STOP-ANDROID")
 
     
-    def tap(self, mappedText=None, text=None):
+    def tap(self, mappedText=None, text=None, desc=None, index=None):
         if text:
             return _tapWithText(text)
+        
+        if desc:
+            return _tapWithDesc(desc)
+        
+        if index:
+            return _tapWithIndex(index)
         
         return super(AndroidDevice, self).tap(self._commands, mappedText)
     

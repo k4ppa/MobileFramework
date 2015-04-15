@@ -37,10 +37,9 @@ class MobileDevice(object):
         return StormTest.ReleaseServerConnection()
     
     
-    def tap(self, appCoordinates, mappedText=None):          
+    def tap(self, commands, mappedText=None):          
         if mappedText:
-            return appCoordinates._tapWithMappedText(mappedText)
-        pass
+            return commands._tapWithMappedText(mappedText)
 
     
 
