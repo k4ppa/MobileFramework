@@ -4,3 +4,4 @@
 src/mobile_framework/tests/runfiles_*
 src/mobile_framework/tests/test_users_actions_*
 MobileDevice.log
+src/mapped_commands/android_commands/samsung_galaxy_tab_3/it_sky_river_commands.pyc
