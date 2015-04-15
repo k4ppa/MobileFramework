@@ -2,8 +2,8 @@
 import stormtest.ClientAPI as StormTest
 
 from mobile_framework.mobile_device import MobileDevice
-from mobile_framework.user_actions_functions import _tapWithText, _tapWithIndex, _tapWithDesc
-from mobile_framework.user_actions_functions import _loadDeviceCommands, _loadAppCommands
+from mobile_framework.android_user_actions_functions import _tapWithText, _tapWithIndex, _tapWithDesc
+from mobile_framework.common_user_actions_functions import _loadDeviceCommands, _loadAppCommands
 
 
 class AndroidDevice(MobileDevice):

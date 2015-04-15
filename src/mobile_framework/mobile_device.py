@@ -6,7 +6,7 @@ import stormtest.ClientAPI as StormTest
 from mobile_framework.connect_functions import _getTestRunConfiguration
 from mobile_framework.connect_functions import _setUpEnvironment
 from mobile_framework.connect_functions import _establishConnection
-from mobile_framework.user_actions_functions import _tapWithMappedText
+from mobile_framework.common_user_actions_functions import _tapWithMappedText
 
 
 log = logging.getLogger('userAction')

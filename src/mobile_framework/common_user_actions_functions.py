@@ -40,26 +40,11 @@ def __importAppModule(deviceCommandsModule):
         raise
 
 
-def _tapWithText(text):
-    log.debug("Tap on text {0}".format(text))
-    return StormTest.PressButton("TAPELEMENT:text:{0}".format(text))
-    
-    
-def _tapWithDesc(desc):
-    log.debug("Tap on desc{0}".format(desc))
-    return StormTest.PressButton("TAPELEMENT:desc:{0}".format(desc))
-    
-    
-def _tapWithIndex(index):
-    log.debug("Tap on index {0}".format(index))
-    return StormTest.PressButton("TAPELEMENT:index:{0}".format(index))
-
-
 def _tapWithMappedText(commands, mappedText):
-        log.debug("Tap on {0}".format(commands[mappedText]))
-        
-        command = commands[mappedText]
-        return StormTest.PressButton('TAP:{0}:{1}:{2}'.format(command['x'], command['y'], command['time']))
+    log.debug("Tap on {0}".format(commands[mappedText]))
+    
+    command = commands[mappedText]
+    return StormTest.PressButton('TAP:{0}:{1}:{2}'.format(command['x'], command['y'], command['time']))
 
 
 
