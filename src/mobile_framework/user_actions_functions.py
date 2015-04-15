@@ -55,6 +55,13 @@ def _tapWithIndex(index):
     return StormTest.PressButton("TAPELEMENT:index:{0}".format(index))
 
 
+def _tapWithMappedText(commands, mappedText):
+        log.debug("Tap on {0}".format(commands[mappedText]))
+        
+        command = commands[mappedText]
+        return StormTest.PressButton('TAP:{0}:{1}:{2}'.format(command['x'], command['y'], command['time']))
+
+
 
 
 

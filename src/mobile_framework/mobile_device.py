@@ -6,6 +6,7 @@ import stormtest.ClientAPI as StormTest
 from mobile_framework.connect_functions import _getTestRunConfiguration
 from mobile_framework.connect_functions import _setUpEnvironment
 from mobile_framework.connect_functions import _establishConnection
+from mobile_framework.user_actions_functions import _tapWithMappedText
 
 
 log = logging.getLogger('userAction')
@@ -42,12 +43,6 @@ class MobileDevice(object):
     def tap(self, appCommands, mappedText=None):       
         commands = appCommands.getCommands()  
         if mappedText:
-            return self._tapWithMappedText(commands, mappedText)
+            return _tapWithMappedText(commands, mappedText)
 
-    
-    def _tapWithMappedText(self, commands, mappedText):
-        log.debug("Tap on {0}".format(commands[mappedText]))
-        
-        command = commands[mappedText]
-        return StormTest.PressButton('TAP:{0}:{1}:{2}'.format(command['x'], command['y'], command['time']))
 
