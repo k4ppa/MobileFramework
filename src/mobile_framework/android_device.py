@@ -13,7 +13,7 @@ class AndroidDevice(MobileDevice):
         
         self._deviceName = deviceName
         self._appName = ''
-        self._commandsModuleName = "mapped_commands.android_commands.{0}".format(self._deviceName)
+        self._commandsModuleName = "mobile_framework.mapped_commands.android_commands.{0}".format(self._deviceName)
         
         self._appCommands = _loadDeviceCommands(self._commandsModuleName)
         pass

@@ -1,5 +1,5 @@
 
-from mapped_commands.android_commands.samsung_galaxy_tab_3.device_commands import DeviceCommands
+from mobile_framework.mapped_commands.android_commands.samsung_galaxy_tab_3.device_commands import DeviceCommands
 
 
 class AppCommands(DeviceCommands):

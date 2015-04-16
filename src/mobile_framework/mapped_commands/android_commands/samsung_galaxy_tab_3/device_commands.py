@@ -1,5 +1,5 @@
 
-from mapped_commands.android_commands.android_commands import AndroidCommands
+from mobile_framework.mapped_commands.android_commands.android_commands import AndroidCommands
 
 
 class DeviceCommands(AndroidCommands):
