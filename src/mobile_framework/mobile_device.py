@@ -16,6 +16,7 @@ class MobileDevice(object):
         self._server = ""
         self._description = ""
         self._slot = 0
+        self._serviceInfo = None
 
         path = os.path.abspath('mobile_framework/log.conf')
         logging.config.fileConfig(path)
@@ -27,7 +28,7 @@ class MobileDevice(object):
     def connect(self, description=''):
         self._connectionLog.info(description)
         self._connectionLog.info("Started connection with the server")    
-        serviceInfo = _getTestRunConfiguration()['service']
+        self._serviceInfo = _getTestRunConfiguration()['service']
         
         self._server, self._slot = _setUpEnvironment()
         self._connectionLog.debug("server:slot = {}:{}".format(self._server, self._slot))
@@ -46,3 +47,5 @@ class MobileDevice(object):
             return _tapWithMappedText(commands, mappedText)
 
 
+    def getServiceInfo(self):
+        return self._serviceInfo
