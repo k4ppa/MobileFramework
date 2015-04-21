@@ -6,9 +6,9 @@ class AppCommands(DeviceCommands):
     
     
     def __init__(self):
-        super(DeviceCommands, self).__init__()
+        DeviceCommands.__init__(self)
         
-        self.commands = {
+        self._appCommands = {
                     'openMenu':{'x':30, 'y':50, 'time':0},
                     'closeMenu':{'x':320,'y':50,'time':0},
                     'Home':{'x':635,'y':55,'time':0}
@@ -18,9 +18,8 @@ class AppCommands(DeviceCommands):
     
     
     def getCommands(self):
-        return self.commands
-    
-  
-        
+        allCommands = self._appCommands.copy()
+        allCommands.update(self._commands)
+        return allCommands
     
     
