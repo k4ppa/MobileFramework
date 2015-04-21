@@ -1,4 +1,5 @@
 
+import os
 import logging.config
 
 import stormtest.ClientAPI as StormTest
@@ -16,7 +17,8 @@ class MobileDevice(object):
         self._description = ""
         self._slot = 0
 
-        logging.config.fileConfig('C:\workspace\MobileFramework\src\mobile_framework/log.conf')
+        path = os.path.abspath('mobile_framework/log.conf')
+        logging.config.fileConfig(path)
         self._connectionLog = logging.getLogger('connection')
         self._userActionLog = logging.getLogger('userAction')
         pass
