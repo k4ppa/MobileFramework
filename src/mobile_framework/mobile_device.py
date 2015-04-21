@@ -17,9 +17,16 @@ class MobileDevice(object):
         self._description = ""
         self._slot = 0
         self._serviceInfo = None
-
-        path = os.path.abspath('mobile_framework/log.conf')
-        logging.config.fileConfig(path)
+        
+        
+        path = os.path.abspath('')
+        path = path[:path.rfind("mobile_framework")]
+        #print path[:path.rfind("mobile_framework")]
+        #print path + 'mobile_framework/log.conf'
+        path = path.replace('\\', '/')
+        print path
+        logging.config.fileConfig(path + 'mobile_framework/log.conf')
+        #logging.config.fileConfig('C:\workspace\MobileFramework\src\mobile_framework/log.conf')
         self._connectionLog = logging.getLogger('connection')
         self._userActionLog = logging.getLogger('userAction')
         pass
