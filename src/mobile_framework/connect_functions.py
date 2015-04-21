@@ -43,7 +43,7 @@ def __setUpTestEnvironment():
 def __setUpRealEnvironment():
     slotAllocated = StormTest.GetPhysicalAllocations()
     server = slotAllocated[0].split(':')[0]
-    slot = slotAllocated[1]
+    slot = slotAllocated[1][0]
     log.info("Test not running under daemon, using real environment")
     
     return server, slot
