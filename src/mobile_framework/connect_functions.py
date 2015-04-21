@@ -40,7 +40,7 @@ def __setUpTestEnvironment():
     return server, slot
     
     
-def __setUpRealEnvironment(self):
+def __setUpRealEnvironment():
     slotAllocated = StormTest.GetPhysicalAllocations()
     server = slotAllocated[0].split(':')[0]
     slot = slotAllocated[1]
